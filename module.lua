@@ -27,7 +27,7 @@ function SimpleMouse:SetIconId(id: string)
 end
 
 function SimpleMouse:ToScreen(): Vector2
-	return Vector2.new(mouse.X, mouse.Y)
+	return InputService:GetMouseLocation()
 end
 
 function SimpleMouse:ToWorld(raycastParams: RaycastParams)
@@ -43,10 +43,10 @@ function SimpleMouse:ToWorld(raycastParams: RaycastParams)
 	--> Execution
 	local mouse2DPos = InputService:GetMouseLocation()
 	local unitRay = workspace.CurrentCamera:ViewportPointToRay( mouse2DPos.X, mouse2DPos.Y, 1)
-	local rayResult = workspace:Raycast(unitRay.Origin, unitRay.Direction * 500, raycastParams)
+	local origin = CFrame.lookAt(unitRay.Origin, unitRay.Origin + unitRay.Direction) * CFrame.new(0,0,-1)
+	local rayResult = workspace:Raycast(origin.Position, unitRay.Direction * 500, raycastParams)
 	
 	if rayResult then
-		print(rayResult.Instance)
 		return {
 			Origin = unitRay.Origin,
 			Position = rayResult.Position,
@@ -55,7 +55,7 @@ function SimpleMouse:ToWorld(raycastParams: RaycastParams)
 			Instance = rayResult.Instance,
 		}
 	else
-		local resultPosition = unitRay.Origin + unitRay.Direction
+		local resultPosition = unitRay.Origin + unitRay.Direction * 500
 		return {
 			Origin = unitRay.Origin,
 			Position = resultPosition,
