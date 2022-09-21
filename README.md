@@ -1,4 +1,4 @@
-# SimpleMouse
+# SimpleMouse V1.1
 A Roblox Mouse Module to facilite your script.
 
 This Module joins UserInputService, PlayerMouse(), Camera, Raycast functions to simplify your script and overcome some disadvantages
