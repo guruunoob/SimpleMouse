@@ -41,10 +41,12 @@ function SimpleMouse:ToWorld(raycastParams: RaycastParams)
 	}
 	
 	--> Execution
-	local unitRay = workspace.CurrentCamera:ScreenPointToRay( mouse.X, mouse.Y )
-	local rayResult = workspace:Raycast(unitRay.Origin, unitRay.Direction, raycastParams)
+	local mouse2DPos = InputService:GetMouseLocation()
+	local unitRay = workspace.CurrentCamera:ViewportPointToRay( mouse2DPos.X, mouse2DPos.Y, 1)
+	local rayResult = workspace:Raycast(unitRay.Origin, unitRay.Direction * 500, raycastParams)
 	
 	if rayResult then
+		print(rayResult.Instance)
 		return {
 			Origin = unitRay.Origin,
 			Position = rayResult.Position,
@@ -53,7 +55,7 @@ function SimpleMouse:ToWorld(raycastParams: RaycastParams)
 			Instance = rayResult.Instance,
 		}
 	else
-		local resultPosition = unitRay.Origin + unitRay.Direction * 500
+		local resultPosition = unitRay.Origin + unitRay.Direction
 		return {
 			Origin = unitRay.Origin,
 			Position = resultPosition,
