@@ -5,6 +5,9 @@ This Module joins UserInputService, PlayerMouse(), Camera, Raycast functions to 
 
 > *Status: Developing ⚠️*
 
+### V1.0 to V1.1
++ Mouse bugs in :ToWorld() has been fixed.
+
 ## Methods
 
 > #### **SimpleMouse:ToScreen()**
